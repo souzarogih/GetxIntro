@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx_intro/user_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +32,8 @@ class HomePage extends StatelessWidget {
         fontWeight: FontWeight.w500,
       );
 
+  final userController = UserController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +43,20 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Nome: ',
-              style: commonStyle(),
+            // Apresentação do nome
+            Obx(
+              () => Text(
+                'Nome: ${userController.user.value.name}',
+                style: commonStyle(),
+              ),
             ),
-            Text(
-              'idade: ',
-              style: commonStyle(),
+
+            // Apresentação da idade
+            Obx(
+              () => Text(
+                'idade: ${userController.user.value.age}',
+                style: commonStyle(),
+              ),
             ),
 
             const Divider(
@@ -69,7 +80,9 @@ class HomePage extends StatelessWidget {
 
                 // Botão para salvar o nome
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    userController.setUserName(nameController.text);
+                  },
                   child: const Text('Salvar'),
                 ),
               ],
@@ -93,7 +106,9 @@ class HomePage extends StatelessWidget {
 
                 // Botão para salvar a idade
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    userController.setUserAge(int.parse(ageController.text));
+                  },
                   child: const Text('Salvar'),
                 ),
               ],
