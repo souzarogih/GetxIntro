@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) {
-                      return DataScreen();
+                      return const DataScreen();
                     },
                   ),
                 );
@@ -115,8 +115,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class DataScreen extends StatelessWidget {
-  DataScreen({
+class DataScreen extends GetView<UserController> {
+  const DataScreen({
     Key? key,
   }) : super(key: key);
 
@@ -125,7 +125,8 @@ class DataScreen extends StatelessWidget {
         fontWeight: FontWeight.w700,
       );
 
-  final UserController controller = Get.find();
+  // @override
+  // final UserController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
